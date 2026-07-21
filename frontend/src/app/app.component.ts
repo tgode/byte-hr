@@ -1,9 +1,9 @@
-import { Component, OnInit, signal, effect, inject, DestroyRef } from '@angular/core';
+﻿import { Component, OnInit, signal, effect, inject, DestroyRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 export type Theme = 'light' | 'dark';
 
-// Global theme signal — any component can import and use this directly
+// Global theme signal -- any component can import and use this directly
 export const appTheme = signal<Theme>('light');
 
 @Component({

@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, inject } from '@angular/core';
+﻿import { Component, OnInit, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
@@ -76,7 +76,7 @@ import { AnalyticsSummary } from '../../models/chat.model';
                 }
               </div>
             } @else {
-              <p class="no-data">Loading analytics…</p>
+              <p class="no-data">Loading analytics...</p>
             }
           </mat-card-content>
           <mat-card-actions>

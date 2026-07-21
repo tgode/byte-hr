@@ -1,191 +1,208 @@
-/* =========================================================
-   ByteHR AI – Global Styles
-   Microsoft Teams Fluent 2 – Light & Dark Mode
-   ========================================================= */
+﻿@import '@angular/material/prebuilt-themes/azure-blue.css';
 
-@use '@angular/material' as mat;
-@import '@angular/material/prebuilt-themes/azure-blue.css';
+/* =====================================================
+   ByteHR AI -- Futuristic Dark UI
+   ===================================================== */
 
-// ─── Light theme tokens ───────────────────────────────────────
 :root {
-  color-scheme: light;
-
-  // Brand (Teams Purple)
-  --c-primary:          #6264A7;
-  --c-primary-dark:     #494B88;
-  --c-primary-light:    #ECEDF7;
-  --c-primary-rgb:      98, 100, 167;
-
-  // Canvas
-  --c-bg:               #F5F5F5;
-  --c-surface:          #FFFFFF;
-  --c-surface-raised:   #FAFAFA;
-  --c-overlay:          rgba(0,0,0,0.4);
-
-  // Sidebar
-  --c-sidebar-bg:       #FFFFFF;
-  --c-sidebar-hover:    #F0F0F0;
-  --c-sidebar-active:   #ECEDF7;
-  --c-sidebar-border:   #E0E0E0;
-
-  // Text
-  --c-text:             #242424;
-  --c-text-secondary:   #616161;
-  --c-text-muted:       #8A8886;
-  --c-text-inverse:     #FFFFFF;
-
-  // Borders
-  --c-border:           #E0E0E0;
-  --c-border-light:     #F0F0F0;
-  --c-border-focus:     var(--c-primary);
-
-  // Bubbles
-  --c-bubble-user-bg:   #6264A7;
-  --c-bubble-user-text: #FFFFFF;
-  --c-bubble-bot-bg:    #FFFFFF;
-  --c-bubble-bot-text:  #242424;
-  --c-bubble-bot-border:#E0E0E0;
-
-  // Status
-  --c-online:           #92C353;
-  --c-thinking:         #F8D22A;
-  --c-error:            #C50F1F;
-  --c-warning:          #E97132;
-  --c-success:          #107C10;
-
-  // Shadows
-  --shadow-xs:   0 1px 2px rgba(0,0,0,0.06);
-  --shadow-sm:   0 1px 4px rgba(0,0,0,0.10);
-  --shadow-md:   0 4px 12px rgba(0,0,0,0.12);
-  --shadow-lg:   0 8px 28px rgba(0,0,0,0.16);
-  --shadow-glow: 0 0 0 3px rgba(98,100,167,0.18);
-
-  // Layout
-  --sidebar-width:      260px;
-  --sidebar-collapsed:  56px;
-  --header-height:      48px;
-  --input-area-height:  80px;
-
-  // Radius
-  --radius-xs:   3px;
-  --radius-sm:   6px;
-  --radius-md:   8px;
-  --radius-lg:   12px;
-  --radius-xl:   18px;
-  --radius-full: 9999px;
-
-  // Transitions
-  --t-fast:   120ms ease;
-  --t-base:   200ms ease;
-  --t-slow:   300ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-// ─── Dark theme tokens ────────────────────────────────────────
-[data-theme="dark"] {
   color-scheme: dark;
 
-  --c-primary:          #7B83EB;
-  --c-primary-dark:     #9299F7;
-  --c-primary-light:    #2D2E4A;
-  --c-primary-rgb:      123, 131, 235;
+  /* Neon accent */
+  --c-primary:          #00D4FF;
+  --c-primary-dark:     #00A8CC;
+  --c-primary-light:    rgba(0, 212, 255, 0.10);
+  --c-primary-rgb:      0, 212, 255;
+  --c-secondary:        #B44FFF;
+  --c-secondary-rgb:    180, 79, 255;
 
-  --c-bg:               #1B1B1B;
-  --c-surface:          #292929;
-  --c-surface-raised:   #333333;
+  /* Deep space canvas */
+  --c-bg:               #080C14;
+  --c-surface:          rgba(255,255,255,0.04);
+  --c-surface-raised:   rgba(255,255,255,0.07);
+  --c-glass:            rgba(10, 20, 40, 0.70);
+  --c-glass-border:     rgba(0, 212, 255, 0.14);
   --c-overlay:          rgba(0,0,0,0.6);
 
-  --c-sidebar-bg:       #1F1F1F;
-  --c-sidebar-hover:    #2A2A2A;
-  --c-sidebar-active:   #2D2E4A;
-  --c-sidebar-border:   #383838;
+  /* Sidebar */
+  --c-sidebar-bg:       rgba(5, 10, 22, 0.92);
+  --c-sidebar-hover:    rgba(0, 212, 255, 0.07);
+  --c-sidebar-active:   rgba(0, 212, 255, 0.12);
+  --c-sidebar-border:   rgba(0, 212, 255, 0.10);
 
-  --c-text:             #FFFFFF;
-  --c-text-secondary:   #C7C7C7;
-  --c-text-muted:       #7A7A7A;
-  --c-text-inverse:     #1B1B1B;
+  /* Text */
+  --c-text:             #E8F4FF;
+  --c-text-secondary:   #7A9EC0;
+  --c-text-muted:       #3D5A73;
+  --c-text-inverse:     #080C14;
 
-  --c-border:           #383838;
-  --c-border-light:     #2E2E2E;
+  /* Borders */
+  --c-border:           rgba(0, 212, 255, 0.12);
+  --c-border-light:     rgba(0, 212, 255, 0.06);
+  --c-border-focus:     var(--c-primary);
 
-  --c-bubble-user-bg:   #7B83EB;
-  --c-bubble-user-text: #FFFFFF;
-  --c-bubble-bot-bg:    #333333;
-  --c-bubble-bot-text:  #FFFFFF;
-  --c-bubble-bot-border:#444444;
+  /* Bubbles */
+  --c-bubble-user-bg:   linear-gradient(135deg, #00D4FF 0%, #B44FFF 100%);
+  --c-bubble-user-text: #ffffff;
+  --c-bubble-bot-bg:    rgba(255,255,255,0.05);
+  --c-bubble-bot-text:  #E8F4FF;
+  --c-bubble-bot-border:rgba(0, 212, 255, 0.15);
 
-  --c-online:           #92C353;
-  --c-thinking:         #F8D22A;
-  --c-error:            #F47574;
-  --c-warning:          #F4B860;
-  --c-success:          #54C254;
+  /* Status */
+  --c-online:           #00FFA3;
+  --c-thinking:         #FFD700;
+  --c-error:            #FF4D6A;
+  --c-warning:          #FF9A3C;
+  --c-success:          #00FFA3;
 
-  --shadow-xs:   0 1px 2px rgba(0,0,0,0.3);
-  --shadow-sm:   0 1px 4px rgba(0,0,0,0.4);
-  --shadow-md:   0 4px 12px rgba(0,0,0,0.5);
-  --shadow-lg:   0 8px 28px rgba(0,0,0,0.6);
-  --shadow-glow: 0 0 0 3px rgba(123,131,235,0.25);
+  /* Glows & Shadows */
+  --shadow-xs:   0 1px 4px rgba(0,0,0,0.5);
+  --shadow-sm:   0 2px 8px rgba(0,0,0,0.6);
+  --shadow-md:   0 4px 20px rgba(0,0,0,0.7);
+  --shadow-lg:   0 8px 40px rgba(0,0,0,0.8);
+  --shadow-glow: 0 0 0 2px rgba(0,212,255,0.25), 0 0 20px rgba(0,212,255,0.12);
+  --shadow-neon: 0 0 12px rgba(0,212,255,0.4), 0 0 40px rgba(0,212,255,0.15);
+  --shadow-purple-glow: 0 0 12px rgba(180,79,255,0.4), 0 0 40px rgba(180,79,255,0.15);
+
+  /* Layout */
+  --sidebar-width:      260px;
+  --header-height:      56px;
+
+  /* Radius */
+  --radius-xs:   3px;
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   14px;
+  --radius-xl:   20px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --t-fast:   120ms ease;
+  --t-base:   200ms ease;
+  --t-slow:   350ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-// ─── Base reset ───────────────────────────────────────────────
+/* Light mode override */
+[data-theme="light"] {
+  color-scheme: light;
+  --c-primary:          #5B5BD6;
+  --c-primary-dark:     #3E3EB0;
+  --c-primary-light:    rgba(91,91,214,0.10);
+  --c-primary-rgb:      91, 91, 214;
+  --c-secondary:        #9333EA;
+  --c-bg:               #F0F2FA;
+  --c-surface:          rgba(255,255,255,0.85);
+  --c-surface-raised:   #FFFFFF;
+  --c-glass:            rgba(240,242,250,0.85);
+  --c-glass-border:     rgba(91,91,214,0.18);
+  --c-sidebar-bg:       rgba(245,246,255,0.95);
+  --c-sidebar-hover:    rgba(91,91,214,0.07);
+  --c-sidebar-active:   rgba(91,91,214,0.12);
+  --c-sidebar-border:   rgba(91,91,214,0.12);
+  --c-text:             #1A1A2E;
+  --c-text-secondary:   #4A5568;
+  --c-text-muted:       #A0AEC0;
+  --c-border:           rgba(91,91,214,0.15);
+  --c-border-light:     rgba(91,91,214,0.07);
+  --c-bubble-user-bg:   linear-gradient(135deg, #5B5BD6 0%, #9333EA 100%);
+  --c-bubble-user-text: #ffffff;
+  --c-bubble-bot-bg:    rgba(255,255,255,0.9);
+  --c-bubble-bot-text:  #1A1A2E;
+  --c-bubble-bot-border:rgba(91,91,214,0.15);
+  --c-online:           #10B981;
+  --c-thinking:         #F59E0B;
+  --c-error:            #EF4444;
+  --shadow-glow: 0 0 0 2px rgba(91,91,214,0.25), 0 0 20px rgba(91,91,214,0.10);
+  --shadow-neon: 0 0 12px rgba(91,91,214,0.3);
+  --shadow-xs:   0 1px 3px rgba(0,0,0,0.08);
+  --shadow-sm:   0 2px 8px rgba(0,0,0,0.10);
+  --shadow-md:   0 4px 20px rgba(0,0,0,0.12);
+  --shadow-lg:   0 8px 40px rgba(0,0,0,0.16);
+}
+
 *, *::before, *::after { box-sizing: border-box; }
 
-html {
-  height: 100%;
-  font-size: 14px;
-}
+html { height: 100%; font-size: 14px; }
 
 body {
   height: 100%;
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
-               Arial, 'Noto Sans', sans-serif;
+  margin: 0; padding: 0;
+  font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--c-bg);
   color: var(--c-text);
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  transition: background var(--t-slow), color var(--t-slow);
+  overflow: hidden;
+}
+
+/* Animated background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 10%, rgba(0,212,255,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 90%, rgba(180,79,255,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at 50% 50%, rgba(0,100,180,0.04) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+[data-theme="light"] body::before {
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 10%, rgba(91,91,214,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 90%, rgba(147,51,234,0.04) 0%, transparent 60%);
 }
 
 a { color: var(--c-primary); text-decoration: none; }
-a:hover { text-decoration: underline; }
-
 button { font-family: inherit; }
 
-// ─── Custom scrollbar ─────────────────────────────────────────
-::-webkit-scrollbar       { width: 5px; height: 5px; }
+/* Scrollbar */
+::-webkit-scrollbar       { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: var(--c-border);
+  background: rgba(0,212,255,0.2);
   border-radius: 10px;
 }
-::-webkit-scrollbar-thumb:hover { background: var(--c-text-muted); }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,212,255,0.4); }
+[data-theme="light"] ::-webkit-scrollbar-thumb { background: rgba(91,91,214,0.2); }
 
-// ─── Angular Material overrides ───────────────────────────────
-.mat-toolbar             { background: transparent !important; }
+/* Angular Material overrides */
+.mat-toolbar { background: transparent !important; }
 .mat-mdc-snack-bar-container {
-  --mdc-snackbar-container-color: var(--c-surface);
-  --mdc-snackbar-supporting-text-color: var(--c-text);
+  --mdc-snackbar-container-color: rgba(10,20,40,0.95);
+  --mdc-snackbar-supporting-text-color: #E8F4FF;
   border-radius: var(--radius-md) !important;
-  border: 1px solid var(--c-border);
-  box-shadow: var(--shadow-md) !important;
+  border: 1px solid var(--c-glass-border) !important;
+  backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-md), var(--shadow-glow) !important;
 }
-
-// Icon button sizes
 .mat-mdc-icon-button.sm {
-  width: 32px !important;
-  height: 32px !important;
-  padding: 4px !important;
+  width: 32px !important; height: 32px !important; padding: 4px !important;
   .mat-icon { font-size: 18px; width: 18px; height: 18px; }
 }
-
-// Mat icon baseline fix
 .mat-icon { vertical-align: middle; }
-
-// Document viewer dialog - inherit CSS variables
 .doc-viewer-dialog .mat-mdc-dialog-container {
-  background: var(--c-surface);
+  background: var(--c-glass);
   color: var(--c-text);
-  border-radius: var(--radius-md);
-  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--c-glass-border);
+  backdrop-filter: blur(24px);
+}
+
+/* Force Material dialog to use dark theme */
+.mat-mdc-dialog-container,
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  background: var(--c-glass) !important;
+  color: var(--c-text) !important;
+  border-radius: var(--radius-lg) !important;
+  border: 1px solid var(--c-glass-border) !important;
+  backdrop-filter: blur(24px) !important;
+  box-shadow: var(--shadow-lg), 0 0 40px rgba(0,212,255,0.08) !important;
+}
+.doc-viewer-dialog .mat-mdc-dialog-container,
+.doc-viewer-dialog .mat-mdc-dialog-container .mdc-dialog__surface {
+  background: rgba(8, 14, 28, 0.95) !important;
+  color: var(--c-text) !important;
+}
+[data-theme="light"] .mat-mdc-dialog-container .mdc-dialog__surface {
+  background: rgba(245, 246, 255, 0.97) !important;
 }

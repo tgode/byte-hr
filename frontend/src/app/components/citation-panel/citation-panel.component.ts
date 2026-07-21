@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+﻿import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -46,61 +46,35 @@ import { DocumentViewerDialogComponent } from '../document-viewer-dialog/documen
   `,
   styles: [`
     .citation-panel {
-      background: var(--c-primary-light);
-      border-left: 3px solid var(--c-primary);
-      border-radius: var(--radius-sm);
-      padding: 8px 12px;
+      background: rgba(0, 212, 255, 0.05);
+      border: 1px solid var(--c-glass-border);
+      border-left: 2px solid var(--c-primary);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
       font-size: 12px;
+      backdrop-filter: blur(10px);
     }
     .citation-header {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-weight: 600;
-      color: var(--c-text);
-      margin-bottom: 6px;
+      display: flex; align-items: center; gap: 6px;
+      font-weight: 700; color: var(--c-primary);
+      margin-bottom: 8px; font-size: 11px;
+      text-transform: uppercase; letter-spacing: 0.8px;
     }
-    .citation-icon {
-      font-size: 14px;
-      width: 14px;
-      height: 14px;
-      color: var(--c-primary);
-    }
+    .citation-icon { font-size: 14px; width: 14px; height: 14px; color: var(--c-primary); }
     .citations-list { display: flex; flex-direction: column; gap: 6px; }
-    .citation-item  { display: flex; align-items: flex-start; gap: 6px; }
-    .doc-icon {
-      font-size: 14px;
-      width: 14px;
-      height: 14px;
-      color: var(--c-text-secondary);
-      margin-top: 1px;
-      flex-shrink: 0;
-    }
-    .citation-content {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 6px;
-    }
+    .citation-item  { display: flex; align-items: flex-start; gap: 8px; }
+    .doc-icon { font-size: 14px; width: 14px; height: 14px; color: var(--c-primary); margin-top: 1px; flex-shrink: 0; }
+    .citation-content { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
     .doc-name { font-weight: 500; color: var(--c-text); }
     .meta {
-      color: var(--c-text-secondary);
-      background: var(--c-border);
-      padding: 1px 7px;
-      border-radius: var(--radius-full);
+      color: var(--c-primary); background: var(--c-primary-light);
+      border: 1px solid var(--c-glass-border);
+      padding: 1px 8px; border-radius: var(--radius-full); font-size: 10px;
     }
     .view-btn {
-      display: flex;
-      align-items: center;
-      gap: 2px;
-      color: var(--c-primary);
-      background: none;
-      border: none;
-      padding: 0;
-      cursor: pointer;
-      font-size: 11px;
-      font-family: inherit;
-      text-decoration: none;
+      display: flex; align-items: center; gap: 2px;
+      color: var(--c-primary); background: none; border: none;
+      padding: 0; cursor: pointer; font-size: 11px; font-family: inherit;
     }
     .view-btn:hover { text-decoration: underline; }
     .view-btn mat-icon { font-size: 12px; width: 12px; height: 12px; }
@@ -122,3 +96,4 @@ export class CitationPanelComponent {
     });
   }
 }
+

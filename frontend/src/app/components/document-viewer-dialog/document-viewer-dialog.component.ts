@@ -1,4 +1,4 @@
-import { Component, Inject, signal } from '@angular/core';
+﻿import { Component, Inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -44,7 +44,7 @@ interface DocumentContent {
         @if (loading()) {
           <div class="loading-state">
             <mat-spinner diameter="36" />
-            <span>Loading document…</span>
+            <span>Loading document...</span>
           </div>
         } @else if (error()) {
           <div class="error-state">

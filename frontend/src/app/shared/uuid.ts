@@ -1,4 +1,4 @@
-/** Lightweight UUID v4 generator — no external dependency required. */
+﻿/** Lightweight UUID v4 generator -- no external dependency required. */
 export function uuidv4(): string {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
     const r = (Math.random() * 16) | 0;

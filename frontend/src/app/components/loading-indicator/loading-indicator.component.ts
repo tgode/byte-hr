@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+﻿import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
@@ -11,7 +11,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
       <div class="dot-typing">
         <span></span><span></span><span></span>
       </div>
-      <span class="loading-text">ByteHR AI is thinking…</span>
+      <span class="loading-text">ByteHR AI is thinking...</span>
     </div>
   `,
   styles: [`

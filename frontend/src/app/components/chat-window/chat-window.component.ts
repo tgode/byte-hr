@@ -1,4 +1,4 @@
-import {
+﻿import {
   Component, OnInit, OnDestroy, OnChanges, SimpleChanges,
   Input, Output, EventEmitter,
   signal, computed,
@@ -15,6 +15,7 @@ import { MessageInputComponent } from '../message-input/message-input.component'
 import { ChatService } from '../../services/chat.service';
 import { ChatMessage } from '../../models/chat.model';
 import { uuidv4 } from '../../shared/uuid';
+import { appTheme } from '../../app.component';
 
 @Component({
   selector: 'app-chat-window',
@@ -27,23 +28,24 @@ import { uuidv4 } from '../../shared/uuid';
   template: `
     <div class="chat-window">
 
-      <!-- ── Header ── -->
-      <header class="chat-header">        <div class="header-left">
+      <!-- Header -->
+      <header class="chat-header">
+        <div class="header-left">
           <button class="hamburger-btn" (click)="menuToggle.emit()" aria-label="Open menu">
             <mat-icon>menu</mat-icon>
           </button>
-          <div class="header-avatar" [class.thinking]="isLoading()">
-            <mat-icon>support_agent</mat-icon>
+          <div class="header-brand">
+            <img class="header-logo" src="ENG_logo_with_name-removebg.png" alt="Engineering" />
           </div>
+          <div class="header-divider"></div>
           <div class="header-info">
-            <span class="header-name">ByteHR AI</span>
+            <span class="header-name">HR Assistant</span>
             <span class="header-status">
               <span class="status-dot" [class.thinking]="isLoading()"></span>
-              {{ isLoading() ? 'Thinking…' : 'HR Assistant · Online' }}
+              {{ isLoading() ? 'Thinking...' : 'Online' }}
             </span>
           </div>
         </div>
-
         <div class="header-actions">
           <button mat-icon-button class="sm action-btn"
                   matTooltip="Sync HR documents"
@@ -58,12 +60,12 @@ import { uuidv4 } from '../../shared/uuid';
         </div>
       </header>
 
-      <!-- ── Messages ── -->
+      <!-- Messages -->
       <div class="messages-scroll" #scrollContainer>
         <app-message-list [messages]="messages()" />
       </div>
 
-      <!-- ── Input ── -->
+      <!-- Input -->
       <app-message-input
         #inputComponent
         (messageSent)="onMessageSent($event)"
@@ -73,124 +75,99 @@ import { uuidv4 } from '../../shared/uuid';
   `,
   styles: [`
     :host { display: contents; }
-
     .chat-window {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      background: var(--c-bg);
-      overflow: hidden;
-      transition: background var(--t-slow);
+      display: flex; flex-direction: column; height: 100%;
+      background: transparent; overflow: hidden; position: relative;
     }
-
-    /* ── Header ── */
+    /* Header */
     .chat-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 16px;
-      height: var(--header-height);
-      background: var(--c-surface);
-      border-bottom: 1px solid var(--c-border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 20px; height: var(--header-height);
+      background: var(--c-glass);
+      border-bottom: 1px solid var(--c-glass-border);
+      flex-shrink: 0; gap: 12px;
+      backdrop-filter: blur(24px);
+      position: relative; z-index: 5;
+    }
+    .chat-header::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--c-primary), transparent);
+      opacity: 0.3;
+    }
+    .header-left { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .header-brand {
+      display: flex; align-items: center; flex-shrink: 0;
+      height: 44px; overflow: visible; position: relative;
+      padding: 4px 10px;
+      border-radius: var(--radius-md);
+      background: radial-gradient(circle at 20% 30%, rgba(0,212,255,0.10), transparent 70%);
+    }
+    .header-logo {
+      height: 42px; width: auto; max-width: 220px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 10px rgba(0,212,255,0.30));
+      transition: transform var(--t-base), filter var(--t-base);
+    }
+    .header-brand:hover .header-logo {
+      transform: scale(1.05);
+      filter: drop-shadow(0 4px 16px rgba(0,212,255,0.5));
+    }
+    .header-divider {
+      width: 1px; height: 26px;
+      background: linear-gradient(180deg, transparent, var(--c-border), transparent);
       flex-shrink: 0;
-      gap: 12px;
-      transition: background var(--t-slow), border-color var(--t-slow);
     }
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .header-avatar {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: var(--c-primary);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: box-shadow var(--t-base);
-      mat-icon { font-size: 20px; width: 20px; height: 20px; }
-    }
-    .header-avatar.thinking {
-      box-shadow: 0 0 0 3px rgba(var(--c-primary-rgb), 0.25);
-      animation: avatar-pulse 1.5s ease-in-out infinite;
-    }
-    @keyframes avatar-pulse {
-      0%, 100% { box-shadow: 0 0 0 3px rgba(var(--c-primary-rgb), 0.25); }
-      50%       { box-shadow: 0 0 0 6px rgba(var(--c-primary-rgb), 0.08); }
-    }
-    .header-info {
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-    }
+    .header-info { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
     .header-name {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--c-text);
-      line-height: 1.2;
+      font-size: 14px; font-weight: 700; color: var(--c-text); letter-spacing: -0.2px;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
     .header-status {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 11.5px;
-      color: var(--c-text-secondary);
-      line-height: 1.2;
+      display: flex; align-items: center; gap: 5px;
+      font-size: 11px; color: var(--c-text-secondary); letter-spacing: 0.2px;
     }
     .status-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--c-online);
-      flex-shrink: 0;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--c-online); flex-shrink: 0;
+      box-shadow: 0 0 6px var(--c-online);
       transition: background var(--t-base);
     }
     .status-dot.thinking {
       background: var(--c-thinking);
+      box-shadow: 0 0 8px var(--c-thinking);
       animation: dot-blink 0.9s ease-in-out infinite;
     }
     @keyframes dot-blink {
-      0%, 100% { opacity: 1; }
-      50%       { opacity: 0.2; }
+      0%, 100% { opacity: 1; } 50% { opacity: 0.2; }
     }
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 2px;
-    }
+    .header-actions { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
     .action-btn {
       color: var(--c-text-muted) !important;
       transition: color var(--t-fast) !important;
+      border-radius: var(--radius-md) !important;
     }
-    .action-btn:hover { color: var(--c-text) !important; }
-
-    /* ── Messages scroll ── */
+    .action-btn:hover {
+      color: var(--c-primary) !important;
+      background: var(--c-primary-light) !important;
+    }
+    /* Messages scroll */
     .messages-scroll {
-      flex: 1;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      scroll-behavior: smooth;
+      flex: 1; overflow-y: auto; display: flex; flex-direction: column;
+      scroll-behavior: smooth; min-height: 0; position: relative; z-index: 1;
     }
     .hamburger-btn {
-      display: none;
-      align-items: center; justify-content: center;
+      display: none; align-items: center; justify-content: center;
       width: 36px; height: 36px; padding: 0;
       border: none; background: transparent;
       color: var(--c-text-secondary); cursor: pointer;
       border-radius: var(--radius-md);
-      transition: background var(--t-fast), color var(--t-fast);
+      transition: all var(--t-fast);
       flex-shrink: 0;
       mat-icon { font-size: 22px; width: 22px; height: 22px; }
     }
-    .hamburger-btn:hover { background: var(--c-sidebar-hover); color: var(--c-text); }
-    @media (max-width: 768px) {
-      .hamburger-btn { display: flex; }
-    }
+    .hamburger-btn:hover { background: var(--c-primary-light); color: var(--c-primary); }
+    @media (max-width: 768px) { .hamburger-btn { display: flex; } }
   `]
 })
 export class ChatWindowComponent implements OnInit, OnChanges, OnDestroy, AfterViewChecked {
@@ -212,6 +189,8 @@ export class ChatWindowComponent implements OnInit, OnChanges, OnDestroy, AfterV
 
   private readonly _isLoading = signal(false);
   readonly isLoading = this._isLoading.asReadonly();
+
+  readonly isDark = computed(() => appTheme() === 'dark');
 
   private shouldScrollToBottom = false;
   private suggestionListener!: EventListener;
@@ -258,7 +237,7 @@ export class ChatWindowComponent implements OnInit, OnChanges, OnDestroy, AfterV
     this.inputComponent?.setDisabled(true);
     this.shouldScrollToBottom = true;
 
-    const title = text.length > 40 ? text.slice(0, 40) + '…' : text;
+    const title = text.length > 40 ? text.slice(0, 40) + '...' : text;
     this.conversationStarted.emit({ id: this.conversationId, title, preview: text });
 
     this.chatService.sendMessage({ message: text, conversationId: this.conversationId }).subscribe({
@@ -305,5 +284,3 @@ export class ChatWindowComponent implements OnInit, OnChanges, OnDestroy, AfterV
     } catch { /* ignore */ }
   }
 }
-
-
