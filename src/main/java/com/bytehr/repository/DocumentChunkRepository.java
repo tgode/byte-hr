@@ -13,7 +13,7 @@ import java.util.UUID;
 @Repository
 public interface DocumentChunkRepository extends JpaRepository<DocumentChunk, UUID> {
 
-    @Modifying
+    @Modifying(clearAutomatically = true)
     @Query("DELETE FROM DocumentChunk dc WHERE dc.document.id = :documentId")
     void deleteByDocumentId(@Param("documentId") UUID documentId);
 
@@ -22,3 +22,4 @@ public interface DocumentChunkRepository extends JpaRepository<DocumentChunk, UU
     @Query("SELECT dc FROM DocumentChunk dc WHERE dc.document.id = :documentId ORDER BY dc.chunkIndex ASC")
     List<DocumentChunk> findByDocumentIdOrderByChunkIndex(@Param("documentId") UUID documentId);
 }
+

@@ -53,7 +53,7 @@ public class Document {
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
 
-    @OneToMany(mappedBy = "document", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "document", fetch = FetchType.LAZY)
     @Builder.Default
     private List<DocumentChunk> chunks = new ArrayList<>();
 
@@ -62,3 +62,4 @@ public class Document {
         createdAt = Instant.now();
     }
 }
+

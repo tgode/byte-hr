@@ -4,6 +4,7 @@ import com.bytehr.api.dto.HrChatResponse;
 import com.bytehr.api.dto.RelevantChunk;
 import com.bytehr.model.Analytics;
 import com.bytehr.repository.AnalyticsRepository;
+import com.bytehr.config.RagProperties;
 import com.bytehr.service.impl.HrResponseAgentImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,6 +28,7 @@ class HrResponseAgentTest {
     @Mock private LanguageDetectionService languageDetectionService;
     @Mock private ConversationService conversationService;
     @Mock private AnalyticsRepository analyticsRepository;
+    @Mock private RagProperties ragProperties;
 
     private HrResponseAgentImpl agent;
 
@@ -34,7 +36,7 @@ class HrResponseAgentTest {
     void setUp() {
         agent = new HrResponseAgentImpl(
                 vectorSearchService, chatService,
-                languageDetectionService, conversationService, analyticsRepository);
+                languageDetectionService, conversationService, analyticsRepository, ragProperties);
         ReflectionTestUtils.setField(agent, "topK", 5);
         ReflectionTestUtils.setField(agent, "confidenceThreshold", 0.6);
     }
@@ -114,3 +116,4 @@ class HrResponseAgentTest {
                 .build();
     }
 }
+

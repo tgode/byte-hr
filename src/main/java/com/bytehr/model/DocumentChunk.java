@@ -5,22 +5,18 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.domain.Persistable;
 
 import java.time.Instant;
 import java.util.UUID;
 
-/**
- * Represents a text chunk extracted from a Document.
- * The embedding vector is stored in pgvector and managed via JdbcTemplate,
- * not via JPA, due to the custom vector column type.
- */
 @Entity
 @Table(name = "document_chunks")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DocumentChunk {
+public class DocumentChunk implements Persistable<UUID> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -45,5 +41,11 @@ public class DocumentChunk {
     @PrePersist
     public void prePersist() {
         createdAt = Instant.now();
+    }
+
+    @Override
+    @Transient
+    public boolean isNew() {
+        return createdAt == null;
     }
 }

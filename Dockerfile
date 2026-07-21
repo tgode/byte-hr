@@ -9,6 +9,7 @@ RUN mvn clean package -DskipTests -q
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
+RUN apk add --no-cache curl
 RUN addgroup -S bytehr && adduser -S bytehr -G bytehr
 USER bytehr
 
@@ -20,3 +21,4 @@ ENTRYPOINT ["java", \
   "-XX:+UseContainerSupport", \
   "-XX:MaxRAMPercentage=75.0", \
   "-jar", "app.jar"]
+

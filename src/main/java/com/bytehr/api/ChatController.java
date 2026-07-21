@@ -1,6 +1,8 @@
 package com.bytehr.api;
 
+import com.bytehr.api.dto.ChatCitation;
 import com.bytehr.api.dto.ChatRequest;
+import com.bytehr.api.dto.Citation;
 import com.bytehr.api.dto.HrChatResponse;
 import com.bytehr.service.ConversationService;
 import com.bytehr.service.HrResponseAgent;
@@ -68,3 +70,4 @@ public class ChatController {
                 .toList();
     }
 }
+
