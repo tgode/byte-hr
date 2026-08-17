@@ -96,3 +96,21 @@ Set `BYTEHR_SOURCE_TYPE=sharepoint` in `.env` and provide SharePoint credentials
 See [docs/deployment/sharepoint-setup.md](docs/deployment/sharepoint-setup.md).
 
 Full guide: [docs/local-document-mode.md](docs/local-document-mode.md)
+
+
+### Teams testing environment 
+
+./devtunnel.exe user login
+./devtunnel host -p 4200 --allow-anonymous
+
+------> copy url paste on manifest
+ 
+python scripts/generate_teams_package.py --local
+ 
+
+https://dev.teams.microsoft.com/apps/fd5a8cce-3ab6-4147-b3ff-8c7b123247a1/dashboard
+
+
+cd C:\Users\UR DIRECTORY \WorkSpace\byte-hr; docker compose build bytehr-frontend; docker compose up -d bytehr-frontend 2>&1
+
+rebuild redeploy front
