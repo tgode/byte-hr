@@ -2,6 +2,12 @@
 
 This guide explains how to connect ByteHR AI to your SharePoint document library.
 
+> **Personal OneDrive / "-my.sharepoint.com" sites:** If your documents live under a personal
+> site like `https://<tenant>-my.sharepoint.com/personal/<user>/Documents/<Folder>`
+> (e.g. `engit-my.sharepoint.com/personal/kejsi_kostdhima_eng_it/Documents/ByteHR`), see
+> [Section 4b](#4b-personal-onedrive-site-ids) below for the correct Site ID lookup and use
+> `SHAREPOINT_FOLDER_PATH` to scope sync to just that subfolder.
+
 ---
 
 ## 1. Create Azure App Registration
@@ -35,7 +41,7 @@ This guide explains how to connect ByteHR AI to your SharePoint document library
 
 ## 4. Find SharePoint IDs
 
-### Site ID
+### Site ID (team/site collection documents)
 
 ```bash
 # Replace with your tenant and site name
@@ -44,6 +50,23 @@ curl -H "Authorization: Bearer <token>" \
 ```
 
 Copy the `id` field from the response.
+
+### 4b. Personal OneDrive Site IDs
+
+For a personal/OneDrive site (URL contains `-my.sharepoint.com/personal/...`), resolve the
+site by the `personal/<account>` path segment instead:
+
+```bash
+# Example for https://engit-my.sharepoint.com/personal/kejsi_kostdhima_eng_it/...
+curl -H "Authorization: Bearer <token>" \
+  "https://graph.microsoft.com/v1.0/sites/engit-my.sharepoint.com:/personal/kejsi_kostdhima_eng_it"
+```
+
+Copy the `id` field from the response — this is your `SHAREPOINT_SITE_ID`.
+
+> Note: for personal OneDrive sites, you can also resolve the drive directly via
+> `GET /v1.0/users/{userId}/drive` or `GET /v1.0/sites/{siteId}/drive` (singular),
+> which returns the default document library without listing all drives.
 
 ### Drive ID
 
@@ -64,14 +87,22 @@ SHAREPOINT_CLIENT_ID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 SHAREPOINT_CLIENT_SECRET=your~secret~value
 SHAREPOINT_SITE_ID=your-tenant.sharepoint.com,xxxxxxxx-xxxx,xxxxxxxx-xxxx
 SHAREPOINT_DRIVE_ID=b!xxxxxxxxxxxxxxxxxxxxxxxxxx
+# Optional: scope sync to a specific subfolder within the drive (e.g. the "ByteHR" folder
+# in a personal OneDrive under Documents/ByteHR). Leave blank to scan the entire drive.
+SHAREPOINT_FOLDER_PATH=ByteHR
 SHAREPOINT_SYNC_ENABLED=true
+BYTEHR_SOURCE_TYPE=sharepoint
 ```
+
+> `SharePointClient` scans recursively starting at `SHAREPOINT_FOLDER_PATH` (or the drive
+> root if left blank), so any nested subfolders under `ByteHR` are also included automatically.
 
 ---
 
 ## 6. Upload HR Documents
 
-Upload your HR policy documents (PDF, DOCX, XLSX, PPTX) to the configured SharePoint drive.
+Upload your HR policy documents (PDF, DOCX, XLSX, PPTX) to the configured SharePoint drive,
+inside the folder referenced by `SHAREPOINT_FOLDER_PATH` (e.g. `ByteHR`).
 
 Trigger the first sync:
 ```bash

@@ -52,9 +52,15 @@ ollama:
 sharepoint:
   tenant-id: ${SHAREPOINT_TENANT_ID:}
   client-id: ${SHAREPOINT_CLIENT_ID:}
+  # auth-mode: "app" (default, app-only client-secret auth against a site/drive) or
+  # "delegated" (sign in as yourself via device code, reads directly from /me/drive —
+  # no client secret, no site/drive ID lookup, no admin consent required).
+  auth-mode: ${SHAREPOINT_AUTH_MODE:app}
   client-secret: ${SHAREPOINT_CLIENT_SECRET:}
   site-id: ${SHAREPOINT_SITE_ID:}
   drive-id: ${SHAREPOINT_DRIVE_ID:}
+  # Optional: scope sync to a specific subfolder (e.g. "ByteHR"). Leave blank to scan the whole drive.
+  folder-path: ${SHAREPOINT_FOLDER_PATH:}
   sync-enabled: ${SHAREPOINT_SYNC_ENABLED:true}
   sync-interval-ms: ${SHAREPOINT_SYNC_INTERVAL_MS:3600000}
 
